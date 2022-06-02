@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
             this.player = new Player(this);
         }
         update(){
-
+            this.player.update();
         }
         draw(context){
             this.player.draw(context);
@@ -23,8 +23,10 @@ window.addEventListener('load', () => {
     const game = new Game(canvas.width, canvas.height);
 
     function animate(){
-         game.draw(ctx);
-         requestAnimationFrame(animate);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        game.update();
+        game.draw(ctx);
+        requestAnimationFrame(animate);
     }
     animate();
 });
