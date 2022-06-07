@@ -20,6 +20,7 @@
         if( this.x + this.width < 0 ) this.markedForDeletion = true;
      }
      draw( context ){
+        if( this.game.debug ) context.strokeRect(this.x, this.y, this.width, this.height);
         context.drawImage(
             this.image,
             this.frameX * this.width,
