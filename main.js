@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
             this.enemies = [];
             this.enemyTimer = 0;
             this.enemyInterval = 1000;
+            this.score = 0;
             this.debug = true;
         }
         update(deltaTime){
@@ -36,7 +37,7 @@ window.addEventListener('load', () => {
             }
             this.enemies.forEach( enemy => {
                 enemy.update(deltaTime);
-                if( enemy.markedForDeletion ) this.enemies.slice(this.enemies.indexOf(enemy), 1);
+                if( enemy.markedForDeletion ) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
         }
         draw(context){
