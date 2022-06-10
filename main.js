@@ -53,24 +53,25 @@ window.addEventListener('load', () => {
             }
             this.enemies.forEach( enemy => {
                 enemy.update(deltaTime);
-                if( enemy.markedForDeletion ) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
             // floating messages
             this.floatingMessages.forEach( (message) => {
                 message.update();
             });
-            this.floatingMessages = this.floatingMessages.filter( message => !message.markedForDeletion ); 
             // particles
             this.particles.forEach( (particle, idx) => {
                 particle.update();
-                if( particle.markedForDeletion ) this.particles.splice(idx, 1);
             });
             if( this.particles.length > this.maxParticles ) this.particles.length = this.maxParticles;
             // collision sprites
             this.collisions.forEach( (collision, idx) => {
                 collision.update(deltaTime );
-                if( collision.markedForDeletion ) this.collisions.splice(idx, 1);
             });
+            // filter out dead things
+            this.enemies = this.enemies.filter( enemy => !enemy.markedForDeletion );
+            this.particles = this.particles.filter( particle => !particle.markedForDeletion );
+            this.floatingMessages = this.floatingMessages.filter( message => !message.markedForDeletion ); 
+            this.collisions = this.collisions.filter( collision => !collision.markedForDeletion ); 
         }
         draw(context){
             this.background.draw(context);
