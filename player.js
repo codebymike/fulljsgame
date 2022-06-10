@@ -1,4 +1,4 @@
-import { Sitting, Running, Jumping, Falling, Rolling } from "./playerStates.js";
+import { Sitting, Running, Jumping, Falling, Rolling, Diving } from "./playerStates.js";
 
 export class Player {
   constructor(game) {
@@ -18,22 +18,29 @@ export class Player {
     this.frameTimer = 0;
     this.speed = 0;
     this.maxSpeed = 10;
-    this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game)];
+    this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game)];
   }
   update(input, deltaTime) {
     this.checkCollision();
     this.currentState.handleInput(input);
-    // Horizontal
+    // Horizontal movement
     this.x += this.speed;
     if (input.includes("ArrowRight")) this.speed = this.maxSpeed;
     else if (input.includes("ArrowLeft")) this.speed = -this.maxSpeed;
     else this.speed = 0;
     if (this.x < 0) this.x = 0;
     if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
-    // Vertical
+    // Horizontal boundries
+    if (this.x < 0) this.x = 0;
+    if (this.x > this.game.width - this.width) this.x = this.game.width - this.width
+    
+    // Vertical movement
     this.y += this.vy;
     if (!this.onGround()) this.vy += this.weight;
     else this.vy = 0;
+    // Vertical boundaries
+    if( this.y > this.game.height - this.height - this.game.groundMargin ) this.y = this.game.height - this.height - this.game.groundMargin;
+
     // animation
     if( this.frameTimer > this.frameInterval ){
       this.frameTimer = 0;
