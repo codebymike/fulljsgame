@@ -22,7 +22,7 @@ export class UI {
         if( this.game.gameOver ){
             context.textAlign = 'center';
             context.font = `${this.fontSize * 2}px ${this.fontFamily}`;
-            if( this.game.score > 5 ){
+            if( this.game.score > this.game.minScore ){
                 context.fillText("Boo-yah", this.game.width * 0.5, this.game.height * 0.5 - 20);
                 context.font = `${this.fontSize * 0.7}px ${this.fontFamily}`;
                 context.fillText("You a winner hahaha", this.game.width * 0.5, this.game.height * 0.5 + 20);
