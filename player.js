@@ -94,6 +94,8 @@ export class Player {
             this.game.score++;
           }else{
              this.setState(6, 1); // hit
+             this.game.lives--;
+             if( this.game.lives <= 0 ) this.game.gameOver = true;
           }
         }
     });
